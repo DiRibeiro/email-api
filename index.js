@@ -92,6 +92,7 @@ ${error ? `ERROR: ${error.message}` : ''}
 };
 
 app.post('/send-email', async (req, res) => {
+  console.log(req.body);
   const {from, to, cc, bcc, attachments, text, subject, html} = req.body;
 
   try {
@@ -103,7 +104,7 @@ app.post('/send-email', async (req, res) => {
       subject,
       text,
       html,
-      attachments,
+      // attachments,
     };
 
     await transporter.sendMail(mailOptions);
@@ -116,7 +117,7 @@ app.post('/send-email', async (req, res) => {
   }
 });
 
-const PORT = 3000;
+const PORT = 3001;
 
 app.listen(PORT, () => {
     console.log(`[API] rodando na porta ${PORT}`);
