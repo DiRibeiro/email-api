@@ -1,7 +1,13 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-dotenv.config();
+// Para corrigir path no ES6 modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_SMTP,
@@ -31,7 +37,7 @@ app.post('/send-email', async (req, res) => {
       attachments: attachments,
     };
     
-    const info = await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
     res.status(200).send('E-mail enviado com sucesso!');
   } catch (error) {
     console.error(error);
