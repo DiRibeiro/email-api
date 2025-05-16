@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
-import { appendFile, stat, rename, createWriteStream } from 'fs/promises';
+import { appendFile, stat, rename } from 'fs/promises';
 import fs from 'fs';
 import zlib from 'zlib';
 
