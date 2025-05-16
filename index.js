@@ -6,11 +6,19 @@ import express from 'express';
 import { appendFile, stat, rename } from 'fs/promises';
 import fs from 'fs';
 import zlib from 'zlib';
+import cors from 'cors';
 
 // Config path no ES6 modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
+
+// Antes das rotas:
+app.use(cors({
+  origin: '*', // Aceita de qualquer origem (ou especifique ['http://localhost:3000'])
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Body limit aumentado
 app.use(express.json({ limit: '10mb' }));
