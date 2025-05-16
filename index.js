@@ -133,7 +133,7 @@ app.post('/send-email', ensureJson, async (req, res) => {
   }
 });
 
-const PORT = 3001;
+const PORT = 3000;
 
 app.listen(PORT, () => {
     console.log(`[API] rodando na porta ${PORT}`);
