@@ -2,10 +2,14 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import path from 'path';
 import { fileURLToPath } from 'url';
+import express from 'express';
 
 // Para corrigir path no ES6 modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const app = express();
+
+app.use(express.json());
 
 dotenv.config({ path: path.join(__dirname, '.env') });
 
