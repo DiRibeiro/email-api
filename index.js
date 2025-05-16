@@ -9,7 +9,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
-app.use(express.json());
+// 👇 Aqui você aumenta o limite pra 10mb (ou mais se quiser)
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 dotenv.config({ path: path.join(__dirname, '.env') });
 
