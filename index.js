@@ -91,8 +91,24 @@ ${error ? `ERROR: ${error.message}` : ''}
   }
 };
 
-app.post('/send-email', async (req, res) => {
-  console.log(req.body);
+// Middleware para garantir que Content-Type seja application/json
+const ensureJson = (req, res, next) => {
+  const contentType = req.headers['content-type'] || '';
+
+  if (!contentType.includes('application/json')) {
+    console.warn(`[REJECTED] Content-Type inválido: ${contentType}`);
+    return res.status(415).json({
+      message: 'Unsupported Media Type. Content-Type must be application/json'
+    });
+  }
+
+  next(); // Passa pra próxima
+};
+
+app.post('/send-email', ensureJson, async (req, res) => {
+  console.log('[DEBUG] Headers:', req.headers);
+  console.log('[DEBUG] Body:', req.body);
+
   const {from, to, cc, bcc, attachments, text, subject, html} = req.body;
 
   try {
@@ -104,7 +120,7 @@ app.post('/send-email', async (req, res) => {
       subject,
       text,
       html,
-      // attachments,
+      attachments,
     };
 
     await transporter.sendMail(mailOptions);
