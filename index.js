@@ -14,7 +14,7 @@ app.use(express.json());
 dotenv.config({ path: path.join(__dirname, '.env') });
 
 const transporter = nodemailer.createTransport({
-  host: `${process.env.EMAIL_SMTP}`,
+  host: 'smtplw.com.br',
   port: process.env.EMAIL_PORT,
   secure: true, // true for 465, false for other ports
   auth: {
