@@ -113,7 +113,7 @@ const ensureJson = (req, res, next) => {
   next(); // Passa pra próxima
 };
 
-app.post('/send-mail', ensureJson, async (req, res) => {
+app.post('/send-email', ensureJson, async (req, res) => {
   console.log('[DEBUG] Headers:', req.headers);
   console.log('[DEBUG] Body:', req.body);
 
